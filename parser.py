@@ -1,3 +1,5 @@
+# parser.py
+
 from intermediate import Document, Node
 
 class Parser:
@@ -23,7 +25,7 @@ class Parser:
                     else:
                         self.document.root.add_child(node)
             elif kind == 'TEXT':
-                text_node = Node('text', [value])
+                text_node = Node('text', value)
                 if current_section:
                     current_section.add_child(text_node)
                 else:
@@ -34,16 +36,16 @@ class Parser:
     def parse_command(self):
         kind, value = self.tokens[self.pos]
         self.pos += 1
-        command = value[1:] 
+        command = value[1:]  # Remove the '~' from the command
         arguments = []
 
         if self.pos < len(self.tokens) and self.tokens[self.pos][0] == 'LBRACE':
-            self.pos += 1  
+            self.pos += 1  # Skip '{'
             argument = ''
             while self.pos < len(self.tokens) and self.tokens[self.pos][0] != 'RBRACE':
                 argument += self.tokens[self.pos][1]
                 self.pos += 1
             arguments.append(argument)
-            self.pos += 1  
+            self.pos += 1  # Skip '}'
 
         return command, arguments
