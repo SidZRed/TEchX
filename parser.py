@@ -1,34 +1,49 @@
+from intermediate import Document, Node
+
 class Parser:
     def __init__(self, tokens):
         self.tokens = tokens
-        self.current_pos = 0
+        self.pos = 0
+        self.document = Document()
 
     def parse(self):
-        document = []
-        while self.current_pos < len(self.tokens):
-            type, value = self.tokens[self.current_pos]
-            if type == 'COMMAND':
-                document.append(self.parse_command())
-            elif type == 'NEWLINE':
-                self.current_pos += 1
-            else:
-                document.append(('TEXT', value))
-                self.current_pos += 1
-        return document
-    
+        current_section = None
+        while self.pos < len(self.tokens):
+            kind, value = self.tokens[self.pos]
+            if kind == 'COMMAND':
+                command, args = self.parse_command()
+                if command == 'section':
+                    section_node = Node('section', args)
+                    self.document.add_section(section_node)
+                    current_section = section_node
+                else:
+                    node = Node(command, args)
+                    if current_section:
+                        current_section.add_child(node)
+                    else:
+                        self.document.root.add_child(node)
+            elif kind == 'TEXT':
+                text_node = Node('text', [value])
+                if current_section:
+                    current_section.add_child(text_node)
+                else:
+                    self.document.root.add_child(text_node)
+            self.pos += 1
+        return self.document
+
     def parse_command(self):
-        type, value = self.tokens[self.current_pos]
-        self.current_pos += 1
-        commands = value[1:]
+        kind, value = self.tokens[self.pos]
+        self.pos += 1
+        command = value[1:] 
         arguments = []
 
-        if self.current_pos < len(self.tokens) and self.tokens[self.current_pos][0] == 'LBRACE':
-            self.current_pos += 1
+        if self.pos < len(self.tokens) and self.tokens[self.pos][0] == 'LBRACE':
+            self.pos += 1  
             argument = ''
-            while self.current_pos < len(self.tokens) and self.tokens[self.current_pos][0] != 'RBRACE':
-                argument += self.tokens[self.current_pos][1]
-                self.current_pos += 1
+            while self.pos < len(self.tokens) and self.tokens[self.pos][0] != 'RBRACE':
+                argument += self.tokens[self.pos][1]
+                self.pos += 1
             arguments.append(argument)
-            self.current_pos += 1
-        return ('COMMAND', commands, arguments)
-    
+            self.pos += 1  
+
+        return command, arguments
