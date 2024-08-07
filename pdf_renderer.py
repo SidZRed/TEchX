@@ -5,57 +5,35 @@ class PDF_Renderer:
     def __init__(self, document, output_file):
         self.document = document
         self.output_file = output_file
-        self.c = canvas.Canvas(output_file, pagesize=letter)
+        self.canvas = canvas.Canvas(output_file, pagesize=letter)
         self.width, self.height = letter
-        self.y = self.height - 40 
-
-    def render(self):
-        self.render_node(self.document.root)
-        self.c.save()
+        self.current_y = self.height - 40
 
     def render_node(self, node):
-        if node.node_type == 'root':
+        if node.type == "title":
+            self.canvas.setFont("Helvetica-Bold", 20)
+            self.canvas.drawString(40, self.current_y, node.content[0])
+            self.current_y -= 30
+        elif node.type == "author":
+            self.canvas.setFont("Helvetica", 12)
+            self.canvas.drawString(40, self.current_y, f"Author: {node.content[0]}")
+            self.current_y -= 20
+        elif node.type == "date":
+            self.canvas.setFont("Helvetica", 12)
+            self.canvas.drawString(40, self.current_y, f"Date: {node.content[0]}")
+            self.current_y -= 20
+        elif node.type == "section":
+            self.canvas.setFont("Helvetica-Bold", 16)
+            self.canvas.drawString(40, self.current_y, node.content[0])
+            self.current_y -= 25
+        elif node.type == "text":
+            self.canvas.setFont("Helvetica", 12)
+            self.canvas.drawString(40, self.current_y, node.content)
+            self.current_y -= 15
+
+    def render(self):
+        for node in self.document.root.children:
+            self.render_node(node)
             for child in node.children:
                 self.render_node(child)
-        elif node.node_type == 'section':
-            title = node.content[0]
-            self.c.setFont("Helvetica-Bold", 14)
-            self.c.drawString(40, self.y, title)
-            self.y -= 20
-            for child in node.children:
-                self.render_node(child)
-        elif node.node_type == 'title':
-            self.c.setFont("Helvetica-Bold", 16)
-            self.c.drawString(40, self.y, node.content[0])
-            self.y -= 20
-        elif node.node_type == 'author':
-            self.c.setFont("Helvetica", 12)
-            self.c.drawString(40, self.y, f"Author: {node.content[0]}")
-            self.y -= 20
-        elif node.node_type == 'date':
-            self.c.setFont("Helvetica", 12)
-            self.c.drawString(40, self.y, f"Date: {node.content[0]}")
-            self.y -= 20
-        elif node.node_type == 'text':
-            self.c.setFont("Helvetica", 12)
-            self.c.drawString(40, self.y, node.content[0])
-            self.y -= 20
-        elif node.node_type == 'code':
-            language, code = node.content
-            self.c.setFont("Courier", 10)
-            self.c.drawString(40, self.y, f"Code ({language}):")
-            self.y -= 20
-            for line in code.split('\n'):
-                self.c.drawString(40, self.y, line)
-                self.y -= 15
-        elif node.node_type == 'api':
-            self.c.setFont("Helvetica-Bold", 12)
-            self.c.drawString(40, self.y, f"API: {node.content[0]}")
-            self.y -= 20
-        elif node.node_type == 'changelog':
-            self.c.setFont("Courier", 10)
-            self.c.drawString(40, self.y, "Changelog:")
-            self.y -= 20
-            for line in node.content[0].split('\n'):
-                self.c.drawString(40, self.y, line)
-                self.y -= 15
+        self.canvas.save()
