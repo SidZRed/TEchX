@@ -34,7 +34,7 @@ class Parser:
     def parse_command(self):
         kind, value = self.tokens[self.pos]
         self.pos += 1
-        command = value[1:]  # Remove the '~' from the command
+        command = value[1:]   # Parse after the '~' character
         arguments = []
 
         if self.pos < len(self.tokens) and self.tokens[self.pos][0] == 'LBRACE':
