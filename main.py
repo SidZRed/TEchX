@@ -12,7 +12,11 @@ def main():
     args = parser.parse_args()
 
     with open(args.input, 'r') as file:
-        text = file.read()
+        if(args.input[-6:] == ".techx"):
+            text = file.read()
+        else:
+            print("Invalid file format. Please provide a .techx file.")
+            return
 
     tokenizer = Tokenizer(text)
     tokens = tokenizer.get_tokens()
