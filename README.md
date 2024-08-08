@@ -23,11 +23,10 @@ You can install TEchX via `pip`.
   
 
 ### Using PIP :
-
-  
+Visit the PyPI official release : [TEchX](https://pypi.org/project/techx/0.1/)  
 
 ```bash
-pip  install  techx
+pip install techx==0.1
 ```
 
 Also run `pip install requirements.txt` to install some dependencies.
