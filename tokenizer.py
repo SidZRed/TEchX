@@ -21,10 +21,10 @@ class Tokenizer:
         tok_regex = '|'.join(f'(?P<{pair[0]}>{pair[1]})' for pair in token_specification)
 
         for match in re.finditer(tok_regex, self.text):
-            kind = match.lastgroup    
+            type = match.lastgroup    
             value = match.group()     
-            if kind != 'UNKNOWN':     
-                self.tokens.append((kind, value))
+            if type != 'UNKNOWN':     
+                self.tokens.append((type, value))
             else:
                 raise ValueError(f'Undefined token: {value}')
     
