@@ -6,7 +6,7 @@ class HTML_Renderer:
 
     def render_node(self, node):
         if node.type == "title":
-            return f"<h1>{node.content[0]}</h1>\n"
+            return f"<h1 style=\"text-align: center;\">{node.content[0]}</h1>\n"
         elif node.type == "author":
             return f"<p><strong>Author:</strong> {node.content[0]}</p>\n"
         elif node.type == "date":
