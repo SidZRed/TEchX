@@ -49,40 +49,40 @@ class Parser:
         return command, arguments
 
 
-text = """
-~title{Project Documentation}
-~author{Jane Doe}
-~date{2024-08-07}
-~section{Introduction}
-This is the introduction section.
-~section{Installation}
-To install the project, use the following command:
-~code{bash}{npm install myproject}
-~section{Guide}
-Here is a code snippet demonstrating usage:
-~code{javascript}{
-const myProject = require('myproject');
-myProject.doSomething();
-}
-~section{API reference}
-~api{doSomething}
-Description: Performs the main function of the project.
-Parameters: none
-Returns: void
-~section{Changelog}
-~changelog{
-- v1.0.0: Initial release
-- v1.1.0: Added new feature
-}
-"""
+# text = """
+# ~title{Project Documentation}
+# ~author{Jane Doe}
+# ~date{2024-08-07}
+# ~section{Introduction}
+# This is the introduction section.
+# ~section{Installation}
+# To install the project, use the following command:
+# ~code{bash}{npm install myproject}
+# ~section{Guide}
+# Here is a code snippet demonstrating usage:
+# ~code{javascript}{
+# const myProject = require('myproject');
+# myProject.doSomething();
+# }
+# ~section{API reference}
+# ~api{doSomething}
+# Description: Performs the main function of the project.
+# Parameters: none
+# Returns: void
+# ~section{Changelog}
+# ~changelog{
+# - v1.0.0: Initial release
+# - v1.1.0: Added new feature
+# }
+# """
 
-from tokenizer import Tokenizer
-tokenizer = Tokenizer(text)
-tokens = tokenizer.get_tokens()
-parser = Parser(tokens) 
-document = parser.parse()
-# Print the parsed document
-for node in document.root.children:
-    print(node.type, node.content)
-    for child in node.children:
-        print(child.type, child.content)
+# from tokenizer import Tokenizer
+# tokenizer = Tokenizer(text)
+# tokens = tokenizer.get_tokens()
+# parser = Parser(tokens) 
+# document = parser.parse()
+# # Print the parsed document
+# for node in document.root.children:
+#     print(node.type, node.content)
+#     for child in node.children:
+#         print(child.type, child.content)

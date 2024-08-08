@@ -1,5 +1,3 @@
-# main.py
-
 import argparse
 from tokenizer import Tokenizer
 from parser import Parser
