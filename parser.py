@@ -1,5 +1,3 @@
-# parser.py
-
 from intermediate import Document, Node
 
 class Parser:
