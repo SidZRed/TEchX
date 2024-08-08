@@ -166,6 +166,6 @@ Currently, the project is in a nascent stage with more updates and development y
 All contributions are most welcome!
 
 ## License
-This project is an open source tool licensed under the [MIT License]("https://github.com/SidZRed/TEchX/blob/main/LICENSE"). 
+This project is an open source tool licensed under the [MIT License](https://github.com/SidZRed/TEchX/blob/main/LICENSE). 
 
 ***
