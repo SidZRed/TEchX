@@ -163,6 +163,7 @@ Techdoc uses a simple and intuitive syntax to define sections, code snippets, AP
 ## Contributing
 
 Currently, the project is in a nascent stage with more updates and development yet to come. Any new feature ideas and/or bugs can be reported in an issue or by opening a pull request in this repository!
+Design and implementation of some of the features is an ongoing process, so inputs are welcome. (PDF rendering is still at a very basic phase).
 All contributions are most welcome!
 
 ## License
