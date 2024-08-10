@@ -6,7 +6,7 @@ TEchX is a lightweight typesetting system designed for creating easy and smooth 
 
   
 
--  **Custom Typesetting Language**: Use `.techx` files with a simple syntax to define your documentation structure.
+-  **Custom Typesetting Language**: Use `.techx` files with a simple syntax to define your documentation structure. This is a custom file extension for this system.
 
 -  **HTML Output**: Generate clean and responsive HTML documentation from your `.techx` files.
 
