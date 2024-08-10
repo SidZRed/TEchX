@@ -29,7 +29,7 @@ Visit the PyPI official release : [TEchX](https://pypi.org/project/techx/0.1/)
 pip install techx==0.1
 ```
 
-Also run `pip install requirements.txt` to install some dependencies.
+Also run `pip install requirements.txt` after cloning the repository to install some dependencies.
 
 ### Manual Installation
 Clone the repository and install it locally:
